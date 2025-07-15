@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "scheme": "studystacks",
+    "name": "StudyStacks",
+    "slug": "StudyStacks",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/img/darkBrain.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/img/darkBrain.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/img/darkBrain.png",
+        "backgroundColor": "#ffffff"
+      },
+      "edgeToEdgeEnabled": true
+    },
+    "web": {
+      "favicon": "./assets/img/darkBrain.png"
+    },
+    "plugins": [
+      "expo-router"
+    ]
+  }
+}
