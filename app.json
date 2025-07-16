@@ -30,13 +30,6 @@
     },
     "plugins": [
       "expo-router"
-    ],
-    "extra": {
-      "router": {},
-      "eas": {
-        "projectId": "e9bd6611-8bc1-47e1-b5c0-7fae837a54b5"
-      }
-    },
-    "owner": "colthorp789"
+    ]
   }
 }
