@@ -68,7 +68,7 @@ export default function EditCard() {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    //<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <ThemedView style={styles.container}>
 
         <ThemedText title={true} style={styles.heading}>
@@ -104,7 +104,7 @@ export default function EditCard() {
         </ThemedView>
 
       </ThemedView>
-    </TouchableWithoutFeedback>
+    //</TouchableWithoutFeedback>
   )
 }
 

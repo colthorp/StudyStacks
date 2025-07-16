@@ -1,4 +1,5 @@
-import { StyleSheet, Text, TouchableWithoutFeedback, Keyboard } from 'react-native'
+import { StyleSheet, Text, Keyboard, Pressable, TouchableWithoutFeedback } from 'react-native'
+
 import { Link } from 'expo-router'
 import { useState } from 'react'
 import { Colors } from '../../constants/colors'
@@ -10,6 +11,7 @@ import ThemedText from '../../components/ThemedText'
 import Spacer from '../../components/Spacer'
 import ThemedButton from '../../components/ThemedButton'
 import ThemedTextInput from '../../components/ThemedTextInput'
+
 
 const Register = () => {
     const [email, setEmail] = useState('');
@@ -29,7 +31,7 @@ const Register = () => {
     }
     
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    //<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ThemedView style={styles.container}>
 
             <Spacer />
@@ -68,7 +70,7 @@ const Register = () => {
             </Link>
 
         </ThemedView>
-    </TouchableWithoutFeedback>
+    //</TouchableWithoutFeedback>
   )
 }
 

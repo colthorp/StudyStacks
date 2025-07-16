@@ -24,10 +24,19 @@
       "edgeToEdgeEnabled": true
     },
     "web": {
+      "bundler": "metro",
+      "output": "static",
       "favicon": "./assets/img/darkBrain.png"
     },
     "plugins": [
       "expo-router"
-    ]
+    ],
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "e9bd6611-8bc1-47e1-b5c0-7fae837a54b5"
+      }
+    },
+    "owner": "colthorp789"
   }
 }

@@ -1,6 +1,5 @@
 import { StyleSheet, Text } from 'react-native'
 import { Link } from 'expo-router'
-import Logo from '../assets/img/lightBrain.png'
 
 //Themed Components
 import ThemedView from '../components/ThemedView'

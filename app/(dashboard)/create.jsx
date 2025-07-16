@@ -35,7 +35,7 @@ const Create = () => {
     }
 
     return (
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        //<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <ThemedView style={styles.container}>
 
                 <ThemedText title={true} style={styles.heading}>
@@ -67,7 +67,7 @@ const Create = () => {
                 </ThemedButton>
 
             </ThemedView>
-        </TouchableWithoutFeedback>
+        //</TouchableWithoutFeedback>
     )
 }
 

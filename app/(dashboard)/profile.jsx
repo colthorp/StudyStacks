@@ -18,7 +18,7 @@ const Profile = () => {
             <Spacer />
 
             <ThemedText>
-                Time to start studying...
+                Time to start studying!
             </ThemedText>
             <Spacer />
 
