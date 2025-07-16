@@ -22,6 +22,10 @@ export default function CreateCard() {
 
 
   const handleCreateCard = async () => {
+    if(!cardFront.trim() || !cardBack.trim()) {
+      alert('Please fill in both sides of the card')
+      return;
+    }
     await createCard({
       cardFront,
       cardBack,
@@ -61,7 +65,7 @@ export default function CreateCard() {
         <Spacer/>
 
         <ThemedButton onPress={handleCreateCard} disabled={loading}>
-          <Text style={{ color: '#fff' }}>
+          <Text style={{ color: '#f2f2f2' }}>
             {loading ? 'Saving...' : 'Add Card'}
           </Text>
         </ThemedButton>

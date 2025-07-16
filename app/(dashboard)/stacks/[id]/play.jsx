@@ -1,13 +1,15 @@
-import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useLocalSearchParams } from 'expo-router';
 import { useCards } from '../../../../hooks/useCards';
 import { useEffect, useState } from 'react';
-import { StyleSheet, TouchableOpacity, Dimensions, View, useColorScheme } from 'react-native';
+import { StyleSheet, TouchableOpacity, Dimensions, useColorScheme } from 'react-native';
 import { Colors } from '../../../../constants/colors';
+
 
 //Themed Componenets
 import ThemedView from '../../../../components/ThemedView';
 import ThemedText from '../../../../components/ThemedText';
 import Spacer from '../../../../components/Spacer';
+import ThemedFlipCard from '../../../../components/ThemedFlipCard';
 
 
 
@@ -18,6 +20,9 @@ export default function PlayStack() {
   const { cards, fetchCardsByStack } = useCards();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showBack, setShowBack] = useState(false);
+
+  const colorScheme = useColorScheme()
+  const cardText = colorScheme === 'dark' ? Colors.light.text : Colors.dark.text;
 
   useEffect(() => {
     fetchCardsByStack(id);
@@ -60,33 +65,37 @@ export default function PlayStack() {
   return (
     <ThemedView safe style={styles.container}>
       <TouchableOpacity onPress={handleFlip} style={styles.card}>
-        <ThemedText style={styles.cardText}>
-          {showBack ? currentCard.cardBack : currentCard.cardFront}
-        </ThemedText>
+        <ThemedFlipCard style={styles.card}>
+          <ThemedText style={[styles.cardText, {color: cardText}]}>
+            {showBack ? currentCard.cardBack : currentCard.cardFront}
+          </ThemedText>
+        </ThemedFlipCard>
       </TouchableOpacity>
 
-      <Spacer height={20} />
+        <Spacer height={20} />
 
-      <ThemedText>
-        Card {currentIndex + 1} of {stackCards.length}
-      </ThemedText>
-
-      <Spacer height={20} />
-
-      <View style={styles.navContainer}>
-        <ThemedText
-          style={styles.nav}
-          onPress={handlePrev}>
-          ◀ Previous
+        <ThemedText>
+          Card {currentIndex + 1} of {stackCards.length}
         </ThemedText>
 
-        <Spacer height={10} />
-        <ThemedText
-          style={styles.nav}
-          onPress={handleNext}>
-          Next ▶
-        </ThemedText>
-      </View>
+        <Spacer height={20} />
+
+      <ThemedView style={styles.navContainer}>
+          <ThemedText
+            style={styles.nav}
+            onPress={handlePrev}>
+            ◀ Previous
+          </ThemedText>
+
+          <Spacer height={10} />
+          <ThemedText
+            style={styles.nav}
+            onPress={handleNext}>
+            Next ▶
+          </ThemedText>
+          
+      </ThemedView>
+      
     </ThemedView>
   );
 }
@@ -101,11 +110,6 @@ const styles = StyleSheet.create({
   card: {
     width: screenWidth * 0.8,
     height: 250,
-    backgroundColor: 'white',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 10,
-    padding: 20,
   },
   cardText: {
     fontSize: 24,

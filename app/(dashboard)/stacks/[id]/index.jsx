@@ -70,23 +70,23 @@ const StackDetails = () => {
         <Spacer height={10} />
 
         <ThemedView style={styles.button}>
-          <ThemedButton style={styles.button}
-            onPress={() => router.push(`/stacks/${id}/play`)}>
-            <Text style={{ color: 'fff'}}>Study Stack</Text>
-          </ThemedButton>
-          <Spacer height={1} />
+          <ThemedView style={styles.buttonRow}>
 
+            <ThemedButton style={styles.button}
+              onPress={() => router.push(`/stacks/${id}/play`)}>
+              <Text style={{ color: '#f2f2f2'}}>Study Stack</Text>
+            </ThemedButton>
 
-          <ThemedButton
-            onPress={() => router.push(`/stacks/${id}/cards/createCard`)}>
-            <Text style={{ color: 'fff'}}>Add New Card</Text>
-          </ThemedButton>
+            <ThemedButton
+              onPress={() => router.push(`/stacks/${id}/cards/createCard`)}>
+              <Text style={{ color: '#f2f2f2'}}>Add New Card</Text>
+            </ThemedButton>
 
-          <Spacer height={1} />
+            <ThemedButton style={styles.deleteButton} onPress={handleDelete}>
+              <Text style={{ color: '#f2f2f2'}}>Delete Stack</Text>
+            </ThemedButton>
+          </ThemedView>
 
-          <ThemedButton onPress={handleDelete}>
-            <Text style={{ color: 'fff'}}>Delete Stack</Text>
-          </ThemedButton>
         </ThemedView>
       </ThemedView>
   );
@@ -126,8 +126,17 @@ const styles = StyleSheet.create({
       marginBottom: 8
     },
     button: {
-      justifyContent: "center",
-      alignItems: "center"
+      justifyContent: 'center',
+      alignItems: 'center'
+    },
+    deleteButton: {
+      backgroundColor: Colors.delete  
+    },
+    buttonRow: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      marginTop: 20,
+      gap: 10,
     }
 })
 

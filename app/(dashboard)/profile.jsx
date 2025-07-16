@@ -23,7 +23,7 @@ const Profile = () => {
             <Spacer />
 
             <ThemedButton onPress={logout}>
-                <Text style={{ color: 'f2f2f2' }}>Logout</Text>
+                <Text style={{ color: '#f2f2f2' }}>Logout</Text>
             </ThemedButton>
 
         </ThemedView>

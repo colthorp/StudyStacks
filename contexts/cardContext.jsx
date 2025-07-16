@@ -81,6 +81,25 @@ export function CardsProvider({ children }) {
     }
   }
 
+  async function updateCard(cardId, data) {
+  try {
+    const updated = await databases.updateDocument(
+      DATABASE_ID,
+      CARDS_COLLECTION_ID,
+      cardId,
+      data
+    );
+    return updated;
+
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+
+
+
+
   useEffect(() => {
     let unsubscribe;
     const channel = `databases.${DATABASE_ID}.collections.${CARDS_COLLECTION_ID}.documents`;
@@ -93,11 +112,17 @@ export function CardsProvider({ children }) {
           setCards((prev) => [...prev, payload]);
         }
 
+        if (events[0].includes('update')) {
+          setCards((prev) => prev.map((card) =>
+          card.$id === payload.$id ? payload : card));
+        }
+
         if (events[0].includes('delete')) {
           setCards((prev) =>
             prev.filter((card) => card.$id !== payload.$id)
           );
         }
+
       });
     } else {
       setCards([]);
@@ -116,6 +141,7 @@ export function CardsProvider({ children }) {
         fetchCardById,
         createCard,
         deleteCard,
+        updateCard,
       }}
     >
       {children}

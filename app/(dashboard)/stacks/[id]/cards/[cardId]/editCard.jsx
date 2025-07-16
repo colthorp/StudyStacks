@@ -1,7 +1,9 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useState, useEffect } from 'react';
+import { databases } from '../../../../../../lib/appwrite';
 import { StyleSheet, TextInput, Text, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { useCards } from '../../../../../../hooks/useCards';
+import { Colors } from '../../../../../../constants/colors';
 
 //Themed Components
 import ThemedView from '../../../../../../components/ThemedView';
@@ -10,12 +12,18 @@ import ThemedText from '../../../../../../components/ThemedText';
 import ThemedButton from '../../../../../../components/ThemedButton';
 import Spacer from '../../../../../../components/Spacer';
 
+
+
+
 export default function EditCard() {
   const { id: stackId, cardId } = useLocalSearchParams();
-  const { fetchCardById, createCard, deleteCard } = useCards();
+  const { fetchCardById, updateCard, deleteCard } = useCards();
   const [cardFront, setCardFront] = useState('');
   const [cardBack, setCardBack] = useState('');
   const router = useRouter();
+  
+  const DATABASE_ID = process.env.DATABASE_ID || '68657f2e001107851422';
+  const CARDS_COLLECTION_ID = process.env.CARDS_COLLECTION_ID || '686748f2002003b4c8d9';
 
 
   useEffect(() => {
@@ -28,9 +36,35 @@ export default function EditCard() {
   }, [cardId]);
 
   const handleSave = async () => {
-    await deleteCard(cardId); // remove old one
-    await createCard({ cardFront, cardBack, stackId }); // recreate
+    if (!cardFront.trim() || !cardBack.trim()) {
+    alert('Please fill in both sides of the card.');
+    return;
+  }
+
+  try {
+    const updateCard = await databases.updateDocument(
+      DATABASE_ID,
+      CARDS_COLLECTION_ID,
+      cardId,
+      {
+        cardFront,
+        cardBack,
+      }
+    );
+    console.log('Updated card:', updateCard);
+  } catch (error) {
+    console.log('Update Error:', error.message)
+  }
     router.replace(`/stacks/${stackId}`);
+  };
+
+  const handleDelete = async () => {
+    try {
+      await deleteCard(cardId, stackId);
+      router.replace(`/stacks/${stackId}`);
+    } catch (error) {
+      console.log('Delete Error:', error.message)
+    }
   };
 
   return (
@@ -52,18 +86,26 @@ export default function EditCard() {
 
         <ThemedTextInput
           style={styles.multiline}
+          placeholder="Card Back"
           value={cardBack}
           onChangeText={setCardBack}
-          placeholder="Card Back"
+          multiline= {true}
+          
         />
         <Spacer />
 
-        <ThemedButton onPress={handleSave}>
-          <Text style={{ color: 'fff'}}>Update Card</Text>
-        </ThemedButton>
+        <ThemedView style={styles.buttonRow}>
+          <ThemedButton onPress={handleSave}>
+            <Text style={{ color: '#f2f2f2'}}>Update Card</Text>
+          </ThemedButton>
+          <ThemedButton style={styles.deleteButton} onPress={handleDelete}>
+            <Text style={{ color: '#f2f2f2'}}>Delete Card</Text>
+          </ThemedButton>
+        </ThemedView>
+
       </ThemedView>
     </TouchableWithoutFeedback>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -89,5 +131,14 @@ const styles = StyleSheet.create({
       minHeight: 100,
       alignSelf: 'stretch',
       marginHorizontal: 40
+    },
+    buttonRow: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      marginTop: 20,
+      gap: 10,
+    },
+    deleteButton: {
+      backgroundColor: Colors.delete
     }
 });

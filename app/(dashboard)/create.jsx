@@ -20,8 +20,8 @@ const Create = () => {
     const router = useRouter();
 
     const handleSubmit = async () => {
-        if (!title.trim() || !description.trim()) {
-            alert('Please fill in all fields');
+        if (!title.trim()) {
+            alert('Please enter a Stack Title');
             return;
         }
         setLoading(true)
@@ -39,7 +39,7 @@ const Create = () => {
             <ThemedView style={styles.container}>
 
                 <ThemedText title={true} style={styles.heading}>
-                    Add New Stack
+                    Add A New Stack
                 </ThemedText>
                 <Spacer />
 
@@ -53,7 +53,7 @@ const Create = () => {
 
                 <ThemedTextInput
                 style={styles.multiline}
-                placeholder='Stack Description'
+                placeholder='Stack Description (Optional)'
                 value={description}
                 onChangeText={setDescription}
                 multiline={true}
@@ -61,7 +61,7 @@ const Create = () => {
                 <Spacer />
 
                 <ThemedButton onPress={handleSubmit} disabled={loading}>
-                    <Text style={{ color: 'fff' }}>
+                    <Text style={{ color: '#f2f2f2' }}>
                         {loading ? 'Saving...' :'Create Stack'}
                     </Text>
                 </ThemedButton>

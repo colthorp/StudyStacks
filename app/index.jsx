@@ -15,10 +15,10 @@ const Home = () => {
         <Spacer height={20} />
 
 
-      <ThemedText style={styles.title} title={true}>Study Stacks</ThemedText>
+      <ThemedText style={styles.title} title={true}>STUDY STACKS</ThemedText>
 
-      <Spacer height={10} />
-      <ThemedText>A flashcard App</ThemedText>
+      
+      <ThemedText style={styles.subTitle}>A Flashcard App</ThemedText>
       <Spacer />
 
       <Link href="/login" style={styles.link}>
@@ -44,7 +44,10 @@ const styles = StyleSheet.create({
     },
     title: {
         fontWeight: 'bold',
-        fontSize: 18
+        fontSize: 48
+    },
+    subTitle: {
+      fontSize: 25
     },
     link: {
         marginVertical: 10,
